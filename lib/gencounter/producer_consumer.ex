@@ -3,7 +3,7 @@ defmodule Gencounter.ProducerConsumer do
 
 	require Integer
 
-	def start_link do
+	def start_link(_init) do
 		GenStage.start_link(__MODULE__, :state, name: __MODULE__)
 	end
 
@@ -13,7 +13,7 @@ defmodule Gencounter.ProducerConsumer do
 
 	def handle_events(events, _from, state) do
 		numbers =
-			events 
+			events
 			|> Enum.filter(&Integer.is_even/1)
 
 		{:noreply, numbers, state}
