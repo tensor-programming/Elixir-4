@@ -1,7 +1,7 @@
 defmodule Gencounter.Consumer do
 	use GenStage
 
-	def start_link do 
+	def start_link(_init) do
 		GenStage.start_link(__MODULE__, :state)
 	end
 

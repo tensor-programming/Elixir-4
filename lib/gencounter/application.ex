@@ -10,11 +10,11 @@ defmodule Gencounter.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      worker(Gencounter.Producer, [0]),
-      worker(Gencounter.ProducerConsumer, []),
-      worker(Gencounter.Consumer, [], id: :a),
-      worker(Gencounter.Consumer, [], id: :b),
-      worker(Gencounter.Consumer, [], id: :c),
+      {Gencounter.Producer, 0},
+      {Gencounter.ProducerConsumer, []},
+      Supervisor.child_spec({Gencounter.Consumer, []}, id: :a),
+      Supervisor.child_spec({Gencounter.Consumer, []}, id: :b),
+      Supervisor.child_spec({Gencounter.Consumer, []}, id: :c),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
